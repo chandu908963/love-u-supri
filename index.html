@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine Hug & Kiss Wishes</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <p class="tag">Valentine Special</p>
+        <h1>Hugs & Kisses Wish Builder 💖</h1>
+        <p>
+          Pick hug and kiss types, view their meaning, and generate a personalized
+          Valentine wish with images.
+        </p>
+      </header>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Select Kiss Types</h2>
+          <span id="kissCount" class="count">0 selected</span>
+        </div>
+        <div id="kissesGrid" class="item-grid" aria-label="Kiss Types"></div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Select Hug Types</h2>
+          <span id="hugCount" class="count">0 selected</span>
+        </div>
+        <div id="hugsGrid" class="item-grid" aria-label="Hug Types"></div>
+      </section>
+
+      <section class="panel wish-panel">
+        <div class="wish-actions">
+          <h2>Your Valentine Wish</h2>
+          <button id="generateBtn" class="btn primary" type="button">
+            Generate Wish
+          </button>
+          <button id="copyBtn" class="btn" type="button">Copy Wish Text</button>
+          <button id="downloadBtn" class="btn" type="button">Download Wish Image</button>
+          <button id="clearBtn" class="btn" type="button">Clear Selections</button>
+        </div>
+        <p id="actionMessage" class="action-message" aria-live="polite"></p>
+        <div id="wishResult" class="wish-result">
+          Select at least one hug or kiss type and click <strong>Generate Wish</strong>.
+        </div>
+      </section>
+    </main>
+
+    <dialog id="infoModal" class="modal">
+      <article class="modal-card">
+        <button id="closeModalBtn" class="modal-close" aria-label="Close" type="button">✕</button>
+        <img id="modalImage" class="modal-image" alt="Selected type preview" />
+        <h3 id="modalTitle"></h3>
+        <p id="modalType" class="modal-type"></p>
+        <p id="modalExplanation"></p>
+      </article>
+    </dialog>
+
+    <script src="script.js"></script>
+  </body>
+</html>
