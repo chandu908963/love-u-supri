@@ -1,0 +1,285 @@
+:root {
+  color-scheme: light;
+  --bg: #fff4f8;
+  --surface: #ffffff;
+  --text: #2d1a2b;
+  --subtle: #70405f;
+  --primary: #e63b7a;
+  --primary-weak: #ffe4ef;
+  --border: #f4bfd4;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: radial-gradient(circle at top, #ffe3ef 0%, var(--bg) 45%, #fff 100%);
+  overflow-x: hidden;
+}
+
+.app {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 16px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.love-rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.love-drop {
+  position: absolute;
+  top: -10vh;
+  left: var(--x, 50vw);
+  font-size: var(--size, 22px);
+  opacity: var(--opacity, 0.65);
+  animation: love-fall var(--duration, 6s) linear forwards;
+  filter: drop-shadow(0 2px 4px rgba(230, 59, 122, 0.2));
+}
+
+@keyframes love-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(var(--spin, 160deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .love-drop {
+    animation: none;
+    display: none;
+  }
+}
+
+.hero {
+  text-align: center;
+  padding: 16px;
+}
+
+.hero h1 {
+  margin: 0 0 10px;
+  font-size: clamp(1.9rem, 4vw, 2.7rem);
+}
+
+.hero p {
+  margin: 0 auto;
+  max-width: 720px;
+  line-height: 1.6;
+}
+
+.tag {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-top: 18px;
+  box-shadow: 0 8px 30px rgba(230, 59, 122, 0.07);
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.panel-header h2,
+.wish-actions h2 {
+  margin: 0 0 14px;
+  font-size: 1.25rem;
+}
+
+.count {
+  color: var(--subtle);
+  font-size: 0.92rem;
+}
+
+.item-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 12px;
+}
+
+.item-card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px;
+  background: linear-gradient(180deg, #fff 0%, #fff7fb 100%);
+  display: grid;
+  gap: 8px;
+}
+
+.item-card h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.item-card p {
+  margin: 0;
+  color: var(--subtle);
+  font-size: 0.92rem;
+  line-height: 1.45;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.btn {
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.btn.primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+
+.btn.selected {
+  background: var(--primary-weak);
+  border-color: var(--primary);
+  color: var(--primary);
+}
+
+.wish-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.wish-result {
+  margin-top: 16px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  padding: 14px;
+  min-height: 84px;
+  line-height: 1.5;
+  background: #fffafd;
+}
+
+.action-message {
+  min-height: 22px;
+  margin: 6px 2px 0;
+  color: var(--subtle);
+  font-size: 0.92rem;
+}
+
+.wish-result h3 {
+  margin: 0 0 10px;
+}
+
+.wish-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.wish-card {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px;
+  background: #fff;
+}
+
+.wish-card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+.wish-card h4 {
+  margin: 8px 0 4px;
+}
+
+.wish-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--subtle);
+}
+
+.modal {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+.modal::backdrop {
+  background: rgba(30, 8, 20, 0.5);
+}
+
+.modal-card {
+  position: relative;
+  max-width: 500px;
+  width: min(92vw, 500px);
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid var(--border);
+  background: #fff;
+}
+
+.modal-image {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--border);
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: #ffffffcc;
+  cursor: pointer;
+}
+
+.modal-type {
+  color: var(--primary);
+  font-weight: 700;
+  margin: 10px 0 6px;
+}
+
+@media (max-width: 620px) {
+  .app {
+    padding: 16px 12px 30px;
+  }
+
+  .panel {
+    padding: 14px;
+  }
+}
