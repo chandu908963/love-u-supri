@@ -85,8 +85,13 @@ code filename.txt
 
 #### Deleting a File
 ```bash
+# Method 1: Using git rm (recommended)
+git rm filename.txt
+git commit -m "Remove filename.txt"
+
+# Method 2: Remove file first, then stage
 rm filename.txt
-git add filename.txt
+git add filename.txt  # stages the deletion
 git commit -m "Remove filename.txt"
 ```
 
