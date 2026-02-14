@@ -54,7 +54,7 @@ Popular editors for editing files:
 - **Visual Studio Code**: Open the folder and edit files directly
 - **IntelliJ IDEA**: Import the project and edit files
 - **Sublime Text**: Open files or the entire project
-- **Atom**: Edit files with GitHub integration
+- **Neovim**: Modern, extensible vim-based editor
 
 ### Method 4: Using GitHub Desktop
 
