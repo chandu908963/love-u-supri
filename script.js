@@ -106,6 +106,12 @@ const hugTypes = [
   },
 ];
 
+const personalWishParagraphs = [
+  "I love you nana ❤️ Na life lo ni sthanam veru nana nee parichayam ayina apudu nunchi ipati varuku nee kosam petina efforts ichina respect chupichina prema and care nee degara dorikina aa comfort and nammakam netho share chesukuna vishyalu ni tho unde lag matladey laga inka evari degara evaritho intha ga ani vishayalu cheptu intha ga comfortable ga undalenu emo asalu andukey ee janmalo elagu avaledu kbaati vachey janmalo ayina nenu nitho vundela korukuntanu always. Nanu chala baga ardam chesukoni support chesav chala sarlu thanks nana. Ma nenu ninu epudu ayina edpichina kopadina sorry about that nana. Nenu ninu chusina kshanam nundi chala sarlu anukunanu nv na life lo vuntey bagundu ani ni parichayam ayyaka inka inka pichidoni ayipoyanu naku telusu idhi avadu ani but enduku start ayindoo chepalenu ni meda feellings roju ni gurinchi alocanalu prathi kshanam ni gurinchi thoughts niku idhi aytey baguntadi adhi aytey baguntadi anatlu and ni smile adhi chustheu chalu na heart full ayipotundi, ni pics chudani roju antha enduku mrng levaganey and padukuney mundu ninu chudakunda vundanu, prathi ganta ki okasari ayina ni pics chusi nalo nenu eni sarlu navukunano nakey telidu. Nenu koni sarlu overcaring chupinchi viskinchina adhi ni meda istam tho chesinavey and jealous tho chesinavi. I will be there for u nana lifelong niku elanti issue vuna edi ayina matladi anukuna prathi kshanam ni notification kosam okadu chusta vuntadu ani gurtunchuko. Ni msg vasthey chalu naku ekada leni happiness vastundi, the most happiest thing currently is msg from u.",
+  "Manam epudu kalustama ani eduru chusta vunta aa moment na life long na heart lo vundipotundi daniki minchina roju ledu ani na feeling.",
+  "I love you so much nana forever and always. You are my everything, and I am so grateful to have you in my life. Happy Valentine's Day! ❤️",
+];
+
 const kissGifPool = [
   "https://media.giphy.com/media/26ufcYAkp8e66vanu/giphy.gif",
   "https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif",
@@ -247,6 +253,44 @@ function preloadItemGifs(items) {
   });
 }
 
+function initLoveDroppings() {
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    return;
+  }
+
+  const rainLayer = document.createElement("div");
+  rainLayer.className = "love-rain";
+  document.body.append(rainLayer);
+
+  const loveSymbols = ["❤️", "💖", "💕", "💗"];
+  const maxDrops = 42;
+
+  const spawnDrop = () => {
+    if (rainLayer.childElementCount > maxDrops) {
+      rainLayer.firstElementChild?.remove();
+    }
+
+    const drop = document.createElement("span");
+    drop.className = "love-drop";
+    drop.textContent = loveSymbols[Math.floor(Math.random() * loveSymbols.length)];
+    drop.style.setProperty("--x", `${Math.random() * 100}vw`);
+    drop.style.setProperty("--size", `${16 + Math.random() * 16}px`);
+    drop.style.setProperty("--opacity", `${0.45 + Math.random() * 0.45}`);
+    drop.style.setProperty("--duration", `${4.8 + Math.random() * 3.2}s`);
+    drop.style.setProperty("--drift", `${-40 + Math.random() * 80}px`);
+    drop.style.setProperty("--spin", `${-220 + Math.random() * 440}deg`);
+
+    drop.addEventListener("animationend", () => drop.remove());
+    rainLayer.append(drop);
+  };
+
+  for (let index = 0; index < 12; index += 1) {
+    spawnDrop();
+  }
+
+  window.setInterval(spawnDrop, 260);
+}
+
 function createItemCard(item, selectedSet) {
   const card = document.createElement("article");
   card.className = "item-card";
@@ -339,7 +383,7 @@ function getWishText(selectedItems) {
     .map((item) => `• ${item.name}: ${item.explanation}`)
     .join("\n");
 
-  return `Happy Valentine's Day, Ma! ❤️\n\nI choose these special gestures for you today: ${names}. Each one carries its own beautiful meaning, and together they express how much you matter to me.\n\n${detailLines}`;
+  return `Happy Valentine's Day, Ma! ❤️\n\nI choose these special gestures for you today: ${names}. Each one carries its own beautiful meaning, and together they express how much you matter to me.\n\n${personalWishParagraphs.join("\n\n")}\n\n${detailLines}`;
 }
 
 function showActionMessage(message) {
@@ -355,15 +399,14 @@ function renderWish() {
   }
 
   const names = selectedItems.map((item) => item.name).join(", ");
+  const personalParagraphsHtml = personalWishParagraphs.map((paragraph) => `<p>${paragraph}</p>`).join("");
   const intro = `
-    <h3>Happy Valentine's Day, My Love! ❤️</h3>
+    <h3>Happy Valentine's Day, My bujji nanalu! ❤️</h3>
     <p>
       I choose these special gestures for you today: <strong>${names}</strong>.
       Each one carries its own beautiful meaning, and together they express how much you matter to me.
     </p>
-    <p>I love you nana ❤️ Na life lo ni sthanam veru nana nee parichayam ayina apudu nunchi ipati varuku nee kosam petina efforts ichina respect chupichina prema and care nee degara dorikina aa comfort and nammakam netho share chesukuna vishyalu ni tho unde lag matladey laga inka evari degara evaritho intha ga ani vishayalu cheptu intha ga comfortable ga undalenu emo asalu andukey ee janmalo elagu avaledu kbaati vachey janmalo ayina nenu nitho vundela korukuntanu always. Nanu chala baga ardam chesukoni support chesav chala sarlu thanks nana. Ma nenu ninu epudu ayina edpichina kopadina sorry about that nana. Nenu ninu chusina kshanam nundi chala sarlu anukunanu nv na life lo vuntey bagundu ani ni parichayam ayyaka inka inka pichidoni ayipoyanu naku telusu idhi avadu ani but enduku start ayindoo chepalenu ni meda feellings roju ni gurinchi alocanalu prathi kshanam ni gurinchi thoughts niku idhi aytey baguntadi adhi aytey baguntadi anatlu and ni smile adhi chustheu chalu na heart full ayipotundi, ni pics chudani roju antha enduku mrng levaganey and padukuney mundu ninu chudakunda vundanu, prathi ganta ki okasari ayina ni pics chusi nalo nenu eni sarlu navukunano nakey telidu. Nenu koni sarlu overcaring chupinchi viskinchina adhi ni meda istam tho chesinavey and jealous tho chesinavi. I will be there for u nana lifelong niku elanti issue vuna edi ayina matladi anukuna prathi kshanam ni notification kosam okadu chusta vuntadu ani gurtunchuko. Ni msg vasthey chalu naku ekada leni happiness vastundi, the most happiest thing currently is msg from u.</p>
-    <p>Manam epudu kalustama ani eduru chusta vunta aa moment na life long na heart lo vundipotundi daniki minchina roju ledu ani na feeling.</p>
-    <p>I love you so much nana forever and always. You are my everything, and I am so grateful to have you in my life. Happy Valentine's Day! ❤️</p>
+    ${personalParagraphsHtml}
   `;
 
   const cards = selectedItems
@@ -431,15 +474,32 @@ async function downloadWishImage() {
   const width = 1200;
   const padding = 36;
   const canvas = document.createElement("canvas");
-  const height = 180 + selectedItems.length * cardHeight + 24;
-  canvas.width = width;
-  canvas.height = height;
 
   const ctx = canvas.getContext("2d");
   if (!ctx) {
     showActionMessage("Could not create image in this browser.");
     return;
   }
+
+  ctx.font = "500 25px Segoe UI, Arial, sans-serif";
+  const headerParagraphs = [
+    `I choose these special gestures for you today: ${selectedItems.map((item) => item.name).join(", ")}. Each one carries its own beautiful meaning, and together they express how much you matter to me.`,
+    ...personalWishParagraphs,
+  ];
+  const headerLines = [];
+  headerParagraphs.forEach((paragraph, index) => {
+    headerLines.push(...wrapText(ctx, paragraph, width - padding * 2));
+    if (index !== headerParagraphs.length - 1) {
+      headerLines.push("");
+    }
+  });
+
+  const headerStartY = 108;
+  const headerLineHeight = 30;
+  const cardsStartY = headerStartY + headerLines.length * headerLineHeight + 24;
+  const height = cardsStartY + selectedItems.length * cardHeight + 24;
+  canvas.width = width;
+  canvas.height = height;
 
   const gradient = ctx.createLinearGradient(0, 0, width, height);
   gradient.addColorStop(0, "#ffe3ef");
@@ -449,18 +509,19 @@ async function downloadWishImage() {
 
   ctx.fillStyle = "#7c1e4b";
   ctx.font = "700 48px Segoe UI, Arial, sans-serif";
-  ctx.fillText("Happy Valentine's Day, My Love! ❤️", padding, 68);
+  ctx.fillText("Happy Valentine's Day, My bujji nanalu! ❤️", padding, 68);
 
   ctx.fillStyle = "#4f2840";
   ctx.font = "500 25px Segoe UI, Arial, sans-serif";
-  const wishLines = wrapText(ctx, getWishText(selectedItems).split("\n\n")[1], width - padding * 2);
-  wishLines.slice(0, 3).forEach((line, index) => {
-    ctx.fillText(line, padding, 108 + index * 30);
+  headerLines.forEach((line, index) => {
+    if (line) {
+      ctx.fillText(line, padding, headerStartY + index * headerLineHeight);
+    }
   });
 
   for (let index = 0; index < selectedItems.length; index += 1) {
     const item = selectedItems[index];
-    const top = 170 + index * cardHeight;
+    const top = cardsStartY + index * cardHeight;
     const cardX = padding;
     const cardY = top;
     const cardW = width - padding * 2;
@@ -474,7 +535,12 @@ async function downloadWishImage() {
     ctx.fill();
     ctx.stroke();
 
-    const image = await loadImage(item.image);
+    let image;
+    try {
+      image = await loadImage(item.gif || item.image);
+    } catch (error) {
+      image = await loadImage(item.image);
+    }
     ctx.drawImage(image, cardX + 12, cardY + 12, 210, 132);
 
     ctx.fillStyle = "#7c1e4b";
@@ -542,4 +608,5 @@ clearBtn.addEventListener("click", clearSelections);
 
 renderKissAndHugGrids();
 preloadItemGifs([...kisses, ...hugs]);
+initLoveDroppings();
 updateCounts();

@@ -18,12 +18,49 @@ body {
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   color: var(--text);
   background: radial-gradient(circle at top, #ffe3ef 0%, var(--bg) 45%, #fff 100%);
+  overflow-x: hidden;
 }
 
 .app {
   max-width: 1120px;
   margin: 0 auto;
   padding: 28px 16px 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.love-rain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.love-drop {
+  position: absolute;
+  top: -10vh;
+  left: var(--x, 50vw);
+  font-size: var(--size, 22px);
+  opacity: var(--opacity, 0.65);
+  animation: love-fall var(--duration, 6s) linear forwards;
+  filter: drop-shadow(0 2px 4px rgba(230, 59, 122, 0.2));
+}
+
+@keyframes love-fall {
+  0% {
+    transform: translate3d(0, -10vh, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate3d(var(--drift, 0px), 110vh, 0) rotate(var(--spin, 160deg));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .love-drop {
+    animation: none;
+    display: none;
+  }
 }
 
 .hero {
