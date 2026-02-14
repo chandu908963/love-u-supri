@@ -1,4 +1,4 @@
-# hug-kiss
+# love-u-supri
 
 Valentine web app to select kiss and hug types, view explanations in a popup with an image, and generate a personalized Valentine wish from selected options.
 
